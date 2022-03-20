@@ -15,58 +15,69 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
 
 
 public class Demo {
 	
-	/**
-	 
-	 
-	 Task 2
-	 1. Assert the $ value is equak to 3.3 in https://www.walla.co.il/   (https://finance.walla.co.il/)
-	
-	 */
-	
+
 	
 	@Test
-	public void purpouse() {
+	public void Test1() {
 		DesiredCapabilities capabilities = new DesiredCapabilities(); 
 		capabilities.setCapability("marionette",true);
 		WebDriver driver = new FirefoxDriver(capabilities);
 		
 		
-		String baseUrl = "https://www.walla.co.il/";
+		String baseUrl = "https://techdemotbaseo.kinsta.cloud/";
 		driver.navigate().to(baseUrl);
 		System.out.println("Home page ");
 		
-		//driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
-		WebElement NaveBar  = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/header/div[1]/div/div[3]/ul/li[3]/a"));
-		NaveBar.click();
+		driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
 		
-		System.out.println("It should be in Dollar page ");
+	
+		//lets assert we are in the correct page 
+		String actualTitle = driver.getTitle();
+		String expectedTitle = "15 Best Betting Apps in the UK [Android & iOS] 🥇July 2021 - TBA";
+		assertEquals(expectedTitle,actualTitle);
 		
-		
-		// timeout for loading 
-		try
-		{
-		    Thread.sleep(100);
-
-		}
-		catch(InterruptedException ex)
-		{
-		    Thread.currentThread().interrupt();
-		}
-		
-		
-		// now we are at money page 
-		String Dollar_str =  driver.findElement(By.xpath("//*[@id=\"root\"]/div/section[3]/section[2]/ul/li[1]/div[1]")).getAttribute("class");
-		int Dollar= Integer.parseInt(Dollar_str);
-		
-		assertEquals(Dollar,3.3);
+		//assertEquals(Dollar,3.3);
 		
 		driver.close();
 		
+	
+		
+    }
+	
+	
+	@Test
+	public void Test2() {
+		//need to do same as Test1 using emulator 
+	
+		
+    }
+	
+	@Test
+	public void Test3() {
+		//need to do same as Test1 with different VPN  that I need to configured or we can use a special extention and configure Firefox Profile
+		
+		
+	
+				
+		//Proxy proxy = new Proxy();
+		//Adding the desired host and port for the http, ssl, and ftp Proxy Servers respectively
+	//	proxy.setHttpProxy("<HOST:PORT>");
+	//	proxy.setSslProxy("<HOST:PORT>");
+	//	proxy.setSslProxy("<HOST:PORT>");
+	//	proxy.setFtpProxy("<HOST:PORT>");
+	//	FirefoxOptions options = new FirefoxOptions();
+	//	options.setCapability("proxy", proxy);
+		//Calling new Firefox profile for test
+	
 	
 		
     }
